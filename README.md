@@ -24,7 +24,7 @@ Adiciona som ao jogo, como o som da bolinha colidindo com as raquetes e com as p
 Crie diferentes níveis de dificuldade para o modo de jogo contra o computador.
 
 Referências
-Este projeto foi desenvolvido a partir do tutorial  da Alura usando o codepen e  aos poucos foi modificado para js puro para poder ser usado em qualquer plataforma e qualquer projeto em JS.
+Este projeto foi desenvolvido a partir do tutorial  da Alura usando o codepen e  aos poucos foi modificado para js puro para poder ser usado em qualquer plataforma e qualquer prjeto em JS.
 
 
 
