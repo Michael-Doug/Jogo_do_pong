@@ -58,13 +58,13 @@ function mostraRaquete(x, y, largura, altura) {
 }
 
 function movimentaRaquetes(evento) {
-  if (evento.keyCode == cima) {
+  if (evento.keyCode == w) {
     minhaRaqueteY = minhaRaqueteY - 25;
-  } else if (evento.keyCode == baixo) {
-    minhaRaqueteY = minhaRaqueteY + 25;
-  } else if (evento.keyCode == w) {
-    raqueteOponenteY = raqueteOponenteY - 25;
   } else if (evento.keyCode == s) {
+    minhaRaqueteY = minhaRaqueteY + 25;
+  } else if (evento.keyCode == cima) {
+    raqueteOponenteY = raqueteOponenteY - 25;
+  } else if (evento.keyCode == baixo) {
     raqueteOponenteY = raqueteOponenteY + 25;
   }
 }
