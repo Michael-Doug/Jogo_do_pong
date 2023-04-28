@@ -175,5 +175,5 @@ function dispara(evento) {
 }
 
 setInterval(mudaTela, 50);
-tela.onclick = dispara;
-document.onkeydown = movimentaRaquetes;
+tela.addEventListener("click", dispara);
+document.addEventListener("keydown", movimentaRaquetes);
