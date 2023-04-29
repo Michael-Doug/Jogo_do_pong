@@ -26,6 +26,15 @@ var baixo = 40;
 var w = 87;
 var s = 83;
 
+//variavel dos efeitos de som
+var sound_hit = new Audio();
+sound_hit.src = './efeitos/sound_hit.wav'
+var sound_score = new Audio();
+sound_score.src = './efeitos/sound_score.wav'
+var sound_game = new Audio();
+sound_game.src = './efeitos/sound_game.mp3'
+
+
 //taxa de velocidade - indica quantidade que anda no eixo y
 var velocidadeOponente;
 
@@ -79,6 +88,7 @@ function colisaoMinhaRaquete() {
     //yBolinha + raio > minhaRaqueteY
   ) {
     velocidadeX = 10;
+    sound_hit.play();
   }
 }
 
@@ -89,6 +99,7 @@ function colisaoRaqueteOponente() {
     yBolinha + raio > raqueteOponenteY - raqueteAltura / 2
   ) {
     velocidadeX = -10;
+    sound_hit.play();
   }
 }
 
@@ -135,12 +146,15 @@ function incluiPlacar() {
 function marcaPontos() {
   if (xBolinha - raio < 0) {
     pontosOponente += 1;
+    sound_score.play();
   } else if (xBolinha + raio > 600) {
     meusPontos += 1;
+    sound_score.play();
   }
 }
 
 function mudaTela() {
+  sound_game.play();
   desenhaTela();
   desenhaRetangulo(298, 0, 4, 400);
   desenhaCirculo(xBolinha, yBolinha, raio);
