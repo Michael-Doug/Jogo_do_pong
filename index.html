@@ -1,15 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
-  <title>Pong Game</title>
-  <style>
-    canvas {
-      background-color: black;
-      border: 1px solid white;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Pong clássico em JavaScript puro e HTML Canvas, com modo solo, 2 jogadores e controles por toque.">
+  <meta name="theme-color" content="#060b1f">
+  <title>Pong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <canvas id="canvas" width="600" height="400"></canvas>
+  <main class="stage">
+    <div class="screen">
+      <canvas id="canvas" aria-label="Campo do jogo Pong"></canvas>
 
-  <script src="pong.js"></script>
+      <div class="overlay" id="overlay" hidden>
+        <div class="panel" id="panel"></div>
+      </div>
+
+      <button class="mute" id="mute" type="button" aria-label="Alternar som">♪</button>
+    </div>
+
+    <p class="hint" id="hint"></p>
+  </main>
+
+  <script type="module" src="src/main.js"></script>
 </body>
+
+</html>

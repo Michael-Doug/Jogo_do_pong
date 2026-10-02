@@ -1,34 +1,60 @@
-# Jogo_do_pong
+# Jogo do Pong
 
-Projeto simples de um jogo Pong desenvolvido com JavaScript e HTML Canvas.
+Pong em JavaScript puro e HTML Canvas, sem dependências nem build.
 
-# Como Jogar
-O jogo pode ser jogado por duas pessoas, cada uma controlando uma raquete, ou por apenas uma pessoa, jogando contra o computador.
+**Jogar:** https://michael-doug.github.io/Jogo_do_pong/
 
-As teclas para movimentar a raquete são as setas para cima e para baixo para o jogador da esquerda e as teclas "W" e "S" para o jogador da direita. Para jogar contra o computador, basta controlar a raquete da esquerda e o computador controlará a da direita.
+## Como jogar
 
-O objetivo do jogo é fazer a bolinha passar pela raquete adversária, marcando um ponto. Ganha quem faz mais pontos.
+Primeiro a 11 pontos vence. A bola acelera a cada rebatida, e o ângulo do rebote
+depende de onde ela bate na raquete — rebater com a ponta joga a bola mais aberta.
 
-# Funcionamento
-O jogo foi desenvolvido com JavaScript e HTML Canvas. A cada quadro, as funções são chamadas e a tela é instruída novamente.
+| | Raquete esquerda | Raquete direita |
+|---|---|---|
+| Teclado | `W` / `S` | `↑` / `↓` |
+| Toque / mouse | arrastar na metade esquerda | arrastar na metade direita |
 
-A bolinha se movimenta com uma velocidade constante e, ao colidir com as paredes, sua velocidade é invertida. Quando colide com uma das raquetes, sua velocidade em x é invertida, causando o efeito de "quicar".
+No modo contra o computador você controla a raquete esquerda e pode arrastar em
+qualquer ponto da tela. `P` ou `Esc` pausa, `M` liga e desliga o som.
 
-A raquete do computador se movimenta automaticamente em direção à bolinha.
+Três níveis de dificuldade mudam a velocidade da raquete do computador, o tempo de
+reação e a margem de erro da previsão — no fácil ele erra bastante, no difícil quase não.
 
-# Melhorias Futuras
-Algumas melhorias que podem ser feitas no jogo são:
+## Rodando localmente
 
-Implementar o uso de touch para controlar as raquetes em dispositivos móveis;
-Crie diferentes níveis de dificuldade para o modo de jogo contra o computador.
+O jogo usa módulos ES, então precisa ser servido por HTTP (abrir o arquivo direto não funciona):
 
-# Referências
-Este projeto foi desenvolvido a partir do tutorial  da Alura usando o codepen e  aos poucos foi modificado para js puro para poder ser usado em qualquer plataforma e qualquer projeto em JS.
+```bash
+python3 -m http.server 4178
+```
 
-# últimas atualizações
-Fora adicionados sons de efeito no jogo. Tem um som de fundo bem legal, som de colisão da bolinha com as raquetes e também som quando se faz algum ponto.
+## Testes
 
+```bash
+npm test
+```
 
+Cobrem a física e as regras: contagem de pontos, saque, limites das raquetes, rebote,
+colisão sem atravessar a raquete e bola presa na parede.
 
+## Estrutura
 
-Para jogar acesse o site https://michael-doug.github.io/Jogo_do_pong/ usando o github pages.
+```
+index.html      markup e overlay do menu
+styles.css      layout responsivo
+src/config.js   constantes de jogo e dificuldade
+src/game.js     máquina de estados, loop e colisões
+src/entities.js bola e raquetes
+src/ai.js       raquete do computador
+src/renderer.js desenho no canvas
+src/input.js    teclado, mouse e toque
+src/ui.js       menu, pausa e fim de partida
+src/audio.js    efeitos e música
+```
+
+O loop roda com `requestAnimationFrame` e passo fixo de 1/120s, então a velocidade do
+jogo não muda conforme a máquina ou a taxa de atualização do monitor.
+
+## Referências
+
+Começou a partir do tutorial de Pong da Alura e foi reescrito desde então.
