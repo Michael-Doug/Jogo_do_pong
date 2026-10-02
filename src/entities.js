@@ -73,7 +73,7 @@ export class Ball {
     if (this.trail.length > BALL.trailLength) this.trail.pop();
   }
 
-  // Deflection angle comes from where the ball lands on the paddle, Breakout style.
+  // O ângulo do rebote vem do ponto de contato na raquete, estilo Breakout.
   deflect(paddle) {
     const offset = clamp((this.y - paddle.y) / (paddle.height / 2), -1, 1);
     const angle = offset * BALL.maxBounceAngle;

@@ -24,10 +24,12 @@ export const MATCH = {
   countdown: 3,
 };
 
+// `error` é o desvio máximo da mira, em px. Abaixo de meia raquete + raio da bola
+// (57px) a IA nunca erra uma bola — foi assim que o normal ficou invencível.
 export const DIFFICULTY = {
-  easy: { label: 'Fácil', speed: 310, reaction: 0.3, error: 62, anticipation: 0.3 },
-  normal: { label: 'Normal', speed: 470, reaction: 0.17, error: 34, anticipation: 0.6 },
-  hard: { label: 'Difícil', speed: 660, reaction: 0.07, error: 13, anticipation: 0.9 },
+  easy: { label: 'Fácil', speed: 310, reaction: 0.3, error: 110, anticipation: 0.3 },
+  normal: { label: 'Normal', speed: 470, reaction: 0.17, error: 76, anticipation: 0.6 },
+  hard: { label: 'Difícil', speed: 660, reaction: 0.07, error: 63, anticipation: 0.9 },
 };
 
 export const PALETTE = {

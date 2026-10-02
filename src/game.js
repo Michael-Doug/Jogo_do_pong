@@ -54,6 +54,7 @@ export class Game {
 
   setState(state) {
     this.state = state;
+    this.input.active = state === 'playing' || state === 'serving';
     this.onChange(this);
   }
 
@@ -149,7 +150,7 @@ export class Game {
     }
   }
 
-  // Uses the previous position so a fast ball cannot tunnel through a paddle.
+  // Usa a posição anterior para a bola rápida não atravessar a raquete.
   resolvePaddle(paddle, previous) {
     const { ball } = this;
     const movingToward = paddle.side === 'left' ? ball.vx < 0 : ball.vx > 0;

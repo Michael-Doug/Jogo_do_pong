@@ -13,6 +13,6 @@ export function writeSetting(key, value) {
   try {
     localStorage.setItem(PREFIX + key, JSON.stringify(value));
   } catch {
-    // Private browsing and blocked storage must not break the game.
+    // Navegação anônima e storage bloqueado não podem quebrar o jogo.
   }
 }

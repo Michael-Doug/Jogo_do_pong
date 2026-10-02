@@ -1,6 +1,6 @@
 import { BALL, FIELD } from './config.js';
 
-// Predicts where the ball crosses the paddle plane, mirroring wall bounces.
+// Prevê onde a bola cruza o plano da raquete, espelhando os quiques nas paredes.
 function predictImpactY(ball, paddleX) {
   if (ball.vx === 0) return ball.y;
   const time = (paddleX - ball.x) / ball.vx;
@@ -18,19 +18,29 @@ export class Opponent {
     this.difficulty = difficulty;
     this.targetY = paddle.y;
     this.timeSinceDecision = 0;
+    this.aimError = 0;
+    this.incoming = false;
   }
 
   update(ball, dt) {
+    const approaching = Math.sign(ball.vx) === Math.sign(this.paddle.x - FIELD.width / 2);
+
+    // Erra a leitura uma vez por bola. Sorteando a cada decisão os desvios se
+    // cancelavam na aproximação e a IA nunca deixava passar nenhuma.
+    if (approaching && !this.incoming) {
+      this.aimError = (Math.random() - 0.5) * 2 * this.difficulty.error;
+    }
+    this.incoming = approaching;
+
     this.timeSinceDecision += dt;
     if (this.timeSinceDecision >= this.difficulty.reaction) {
       this.timeSinceDecision = 0;
-      this.decide(ball);
+      this.decide(ball, approaching);
     }
     this.paddle.moveTowards(this.targetY, dt, this.difficulty.speed);
   }
 
-  decide(ball) {
-    const approaching = Math.sign(ball.vx) === Math.sign(this.paddle.x - FIELD.width / 2);
+  decide(ball, approaching) {
     if (!approaching) {
       this.targetY = FIELD.height / 2;
       return;
@@ -38,6 +48,6 @@ export class Opponent {
 
     const predicted = predictImpactY(ball, this.paddle.x);
     const aimed = ball.y + (predicted - ball.y) * this.difficulty.anticipation;
-    this.targetY = aimed + (Math.random() - 0.5) * 2 * this.difficulty.error;
+    this.targetY = aimed + this.aimError;
   }
 }

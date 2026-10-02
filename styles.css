@@ -57,7 +57,7 @@ canvas {
   touch-action: none;
 }
 
-/* Fixed to the viewport so the 16:9 field never clips the panel on tall screens. */
+/* Fixo na viewport para o campo 16:9 não cortar o painel em telas altas. */
 .overlay {
   position: fixed;
   inset: 0;
@@ -176,7 +176,7 @@ button[aria-pressed='true'] {
   margin-top: 8px;
 }
 
-/* Pinned to the viewport so it never lands on top of a centered panel. */
+/* Preso na viewport para nunca cair em cima do painel centralizado. */
 .mute {
   position: fixed;
   z-index: 11;

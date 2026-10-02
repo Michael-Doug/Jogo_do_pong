@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { BALL, FIELD, MATCH, PADDLE } from '../src/config.js';
-import { advance, createGame } from './helpers.js';
+import { BALL, DIFFICULTY, FIELD, MATCH, PADDLE } from '../src/config.js';
+import { advance, createGame, measureOpponentMissRate } from './helpers.js';
 
 describe('pontuação', () => {
   it('conta um único ponto quando a bola sai pela esquerda', () => {
@@ -179,5 +179,25 @@ describe('pausa', () => {
 
     game.resume();
     assert.equal(game.state, 'playing');
+  });
+});
+
+describe('dificuldade do computador', () => {
+  const missRates = new Map();
+
+  for (const level of ['easy', 'normal', 'hard']) {
+    it(`a IA deixa passar bolas no nível ${level}`, () => {
+      const rate = measureOpponentMissRate(level);
+      missRates.set(level, rate);
+
+      // Com margem de erro menor que meia raquete + raio da bola, a IA defende
+      // tudo e o nível fica invencível.
+      assert.ok(rate > 0.02, `a IA só errou ${(rate * 100).toFixed(1)}% das bolas`);
+      assert.ok(DIFFICULTY[level].error > PADDLE.height / 2 + BALL.radius);
+    });
+  }
+
+  it('erra mais no fácil do que no difícil', () => {
+    assert.ok(missRates.get('easy') > missRates.get('hard'));
   });
 });

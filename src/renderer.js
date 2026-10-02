@@ -88,7 +88,11 @@ export class Renderer {
     ctx.shadowBlur = 24;
     ctx.fillStyle = paddle.color;
     ctx.beginPath();
-    ctx.roundRect(paddle.x, paddle.top, paddle.width, paddle.height, paddle.width / 2);
+    if (ctx.roundRect) {
+      ctx.roundRect(paddle.x, paddle.top, paddle.width, paddle.height, paddle.width / 2);
+    } else {
+      ctx.rect(paddle.x, paddle.top, paddle.width, paddle.height);
+    }
     ctx.fill();
     ctx.restore();
   }
