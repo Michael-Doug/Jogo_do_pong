@@ -1,0 +1,10 @@
+{
+  "name": "jogo-do-pong",
+  "version": "2.0.0",
+  "description": "Pong em JavaScript puro com HTML Canvas",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}
